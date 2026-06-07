@@ -1094,7 +1094,7 @@ Lockers are 3 physical objects spawned in **Workspace > Garage > Lockers**
 {
   items: [
     { type: "dice", diceType: "basic" },
-    { type: "potion", rarity: "silver", duration: 3600 },
+    { type: "potion", rarity: "epic", duration: 3600 },
     { type: "decoration", id: "#7" },
     { type: "decoration", id: "#12" }
   ]
@@ -1155,9 +1155,9 @@ Workspace/
 ├── Lobby/
 │   ├── Buttons (GUI elements anchored to screen)
 │   ├── Merchant NPC
-│   └── TeleportArea (to garage/merchant)
-├── Garage/
-│   ├── Platform (yellow spotlight floor)
+│   └── Teleports (to garage/merchant)
+├── GarageRNG/
+│   ├── Garage 
 │   ├── Car (spawned dynamically)
 │   ├── Decorations/ (spawned dynamically)
 │   ├── Lockers/ (spawned dynamically)
@@ -1174,17 +1174,16 @@ ServerStorage/
 
 ReplicatedStorage/
 ├── Assets/
-│   ├── Cars/ (car models by rarity)
-│   ├── Decorations/ (#1-#N models)
+│   ├── Cars/ (physical car models)
+│   ├── Decorations/ (physical #1-#N models)
 │   ├── Lockers/ (physical locker models)
-│   └── NPCs/ (bot character models)
+│   └── NPCs/ (bot character physical models)
 ├── Config.lua
 ├── Modules/ (utility scripts)
 └── Events/ (RemoteEvents)
 
 StarterPlayer/
 ├── StarterCharacterScripts/
-│   ├── LobbyUI.lua
 │   └── BidBattleUI.lua
 └── StarterPlayerScripts/
     ├── UIHandler.lua
