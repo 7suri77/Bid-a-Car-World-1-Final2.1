@@ -361,24 +361,36 @@ while currentBidAmount < randomStopPoint:
 
 **RNG GARAGES**
 
-- Basic: 1/2 common | 1/6 uncommon | 1/10 rare  (cars)
-- Golden: 1/4 uncommon | 1/6 rare | 1/10 epic  (cars)
-- Diamond: 1/10 rare | 1/6 epic | 1/12 legendary  (cars)
-- RUBY : 1/21 rare | 1/16 epic | 1/4 legendary | 1/8 SPEC  (cars)
+- Basic:
+- Golden: 
+- Diamond:
+- RUBY :
 
-BEGINNER CAN BE ONLY BASIC RNG GARAGE
-ADVANCED CAN BE BASIC AND GOLDEN
-EXPERT CAN BE BASIC TO RUBY
-
-
-
-**CAR RARITIES**
+**CAR RARITIES** + **RNG GARAGES**
 
 - BEGINNER: common 1/4 | uncommon 1/5 | rare 1/8
 - ADVANCED: uncommon 1/8 | rare 1/6 | epic 1/10
 - EXPERT: rare 1/10 | epic 1/6 | legendary 1/12 (3% SPEC INSTEAD OF LEGENDARY)               |FOR BASIC RNG GARAGE
 - CHOSEN: rare 1/36 | epic 1/24 | legendary 1/8 (10% SPEC INSTEAD OF LEGENDARY)
 - ULTIMATE: epic 1/24 | legendary 1/8 (25% SPEC INSTEAD OF LEGENDARY)
+
+- BEGINNER: common 1/8 | uncommon 1/4 | rare 1/6
+- ADVANCED: uncommon 1/12 | rare 1/6 | epic 1/6
+- EXPERT: rare 1/14 | epic 1/8 | legendary 1/10 (5% SPEC INSTEAD OF LEGENDARY)         |FOR GOLDEN RNG GARAGE
+- CHOSEN: rare 1/50 | epic 1/30 | legendary 1/5 (12% SPEC INSTEAD OF LEGENDARY)
+- ULTIMATE: epic 1/36 | legendary 1/5 (30% SPEC INSTEAD OF LEGENDARY)
+
+- BEGINNER: common 1/10 | uncommon 1/8 | rare 1/4
+- ADVANCED: uncommon 1/12 | rare 1/8 | epic 1/4 
+- EXPERT: rare 1/20 | epic 1/10 | legendary 1/8 (5% SPEC INSTEAD OF LEGENDARY)         |FOR DIAMOND RNG GARAGE
+- CHOSEN: rare 1/50 | epic 1/50 | legendary 1/3 (15% SPEC INSTEAD OF LEGENDARY)
+- ULTIMATE: epic 1/50 | legendary 1/2 (30% SPEC INSTEAD OF LEGENDARY)
+
+- BEGGINER: common 1/10 | uncommon 1/10 | rare 1/2
+- ADVANCED: uncommon 1/14 | rare 1/10 | epic 1/4
+- EXPERT: rare 1/50 | epic 1/14 | legendary 1/6 (10% SPEC INSTEAD OF LEGENDARY)      |FOR RUBY RNG GARAGE
+- CHOSEN: rare 1/50 | epic 1/50 | legendary 1/2 (20% SPEC INSTEAD OF LEGENDARY)
+- ULTIMATE: epic 1/50 | legendary 1/2 ( 40% SPEC INSTEAD OF LEGENDARY)
 
 **Generation Process:**
 ```
