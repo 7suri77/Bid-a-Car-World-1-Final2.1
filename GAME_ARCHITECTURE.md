@@ -186,11 +186,10 @@ DataStoreManager (Foundation - Saves Everything)
       └─→ UIManager (All UI Rendering)
           ├─→ TierSelectionUI (Pop-up)
           ├─→ BidBattleUI (Screen overlay)
-          ├─→ InventoryUI (Pop-up)
+          ├─→ InventoryUI (Pop-up) 
           ├─→ RebirthUI (Pop-up)
           ├─→ TradeUI (Pop-up)
-          ├─→ DiceShopUI (Pop-up)
-          └─→ LobbyUI (Screen overlay)
+          └─→ DiceShopUI (Pop-up)
 ```
 
 ---
@@ -307,15 +306,15 @@ players[playerId] = {
 
 **Core Logic:**
 - All bots use **SINGLE SHARED AI** (not individual)
-- Bids range: **35-65% of garage value**
-- Each bid: random amount within that range
-- Timing: 1 second between bids (not simultaneous)
-- Stop condition: Random stop between 35-65%
+- Bids range: **35-65% of rng garage value**
+- Each bid: each bid add +10% of the actual bid ( if the bid is 300$ it will increase with 30$ and so )
+- Timing: 1 second between bids for bots, and 3 seconds for the player
+- Stop condition: Bots random stop between 35-65%, one brain controlling them all
 - **BID INCREMENT USES 10% SYSTEM** (same as player)
 
 **Algorithm:**
 ```
-garageValue = CarPrice + (DecoCount * 20) + LockerBonus
+garageValue = CarPrice + (DecoCount * 20)
 minBid = garageValue * 0.35
 maxBid = garageValue * 0.65
 randomStopPoint = Random(minBid, maxBid)
@@ -344,9 +343,9 @@ while currentBidAmount < randomStopPoint:
 **Physical Garage Details:**
 - **Location:** Workspace > Garage (pre-built map area)
 - **Platform:** Yellow spotlight platform where bots/player stand
-- **Car Spawn Point:** Center of garage (car model displays here)
-- **Decorations Spawn:** Randomly placed around garage area
-- **Lighting:** Dynamic based on tier (brighter for higher tiers)
+- **Car Spawn Point:** Back of garage (car model displays here) 
+- **Decorations Spawn:** Randomly placed around garage area and around the car
+- **Lighting:** Dynamic based on tier (if its golden its brighter)
 - **Camera Position:** Third-person view, player sees themselves + 3 bots facing car
 
 **Tier Specifications:**
@@ -357,15 +356,29 @@ while currentBidAmount < randomStopPoint:
 | ADVANCED | $500 | Uncommon-Epic | 7-13 | 1/4 |
 | EXPERT | $1200 | Rare-Legendary + 3% SPEC | 13-21 | 1/2 |
 | CHOSEN | $2500 | Rare-Legendary + 10% SPEC | 21-50 | 1/1 (always) |
-| TIER 5 | $5000 | Epic-Legendary +25% SPEC | 50-80 | 2x 1/1 (always double) |
+| ULTIMATE | $5000 | Epic-Legendary +25% SPEC | 50-80 | 2x 1/1 (always double) |
+
+
+**RNG GARAGES**
+
+- Basic: 1/2 common | 1/6 uncommon | 1/10 rare  (cars)
+- Golden: 1/4 uncommon | 1/6 rare | 1/10 epic  (cars)
+- Diamond: 1/10 rare | 1/6 epic | 1/12 legendary  (cars)
+- RUBY : 1/21 rare | 1/16 epic | 1/4 legendary | 1/8 SPEC  (cars)
+
+BEGINNER CAN BE ONLY BASIC RNG GARAGE
+ADVANCED CAN BE BASIC AND GOLDEN
+EXPERT CAN BE BASIC TO RUBY
+
+
 
 **CAR RARITIES**
 
 - BEGINNER: common 1/4 | uncommon 1/5 | rare 1/8
 - ADVANCED: uncommon 1/8 | rare 1/6 | epic 1/10
-- EXPERT: rare 1/10 | epic 1/6 | legendary 1/12 (3% SPEC INSTEAD OF LEGENDARY)
+- EXPERT: rare 1/10 | epic 1/6 | legendary 1/12 (3% SPEC INSTEAD OF LEGENDARY)               |FOR BASIC RNG GARAGE
 - CHOSEN: rare 1/36 | epic 1/24 | legendary 1/8 (10% SPEC INSTEAD OF LEGENDARY)
-- TIER 5: epic 1/24 | legendary 1/8 (25% SPEC INSTEAD OF LEGENDARY)
+- ULTIMATE: epic 1/24 | legendary 1/8 (25% SPEC INSTEAD OF LEGENDARY)
 
 **Generation Process:**
 ```
@@ -432,36 +445,43 @@ inventory[playerId] = {
 
 **UI Tab Structure:**
 
-1. **Items Tab** - Grid layout
+1. **Items Tab** - Grid layout VIRAL MODERN UI
    - Decorations (numbered #1, #2, etc. - 4 per row, scrollable)
    - Potions (4 per row, scrollable)
    - Dice (4 per row, scrollable)
    - Lockers (separate section)
 
-2. **Cars Tab** - Modern Grid with Rarity Sections
-   - `Common` cars - Full row, 4 cars
-   - `Uncommon` cars - Full row, 4 cars
-   - `Rare` - Full row, 4 cars
-   - `Epic` - Full row, 4 cars
-   - `Legendary` - Full row, 4 cars
-   - `SPEC` - Full row, 4 cars
+2. **Cars Tab** - Modern Grid with Rarity Sections VIRAL MORDEN UI
+   - `Common` cars - Full row
+   - `Uncommon` cars - Full row
+   - `Rare` - Full row
+   - `Epic` - Full row
+   - `Legendary` - Full row
+   - `SPEC` - Full row
+      there are 4 cars per row cause its how any other VIRAL MODERN UI HAVE
+     scrollable in up and down, 3X4 cars, sorted by rarity
+   c   c   c   c
+   c   c   c   c
+   c   c   c   c
+     like that will be the cars placed, -- common -- and under the common will be the common cars placed, -- uncommon -- and under it the uncommon cars, and so
    
    **Each car shows:**
-   - Color image (no background)
+   - Color image (with no background)
    - Car name
    - Income $/min
    - If owned: Colored image + Income visible
    - If not owned: Black image + Lock icon + "???" income
 
-3. **Locker Tab** - List with time remaining
-   - Silver (1 hour) - [OPEN] button if ready
+3. **Locker Tab** - List with time remaining 
+LOCKERS AUTOMATICALLY STARTING THE TIMER, SO IF YOU FIND A SILVER ONE YOU JUST NEED TO WAIT 1H FOR IT TO BE ABLE TO OPEN
+   - Silver (1 hour) - Timer or [OPEN]
    - Gold (4 hours) - Timer or [OPEN]
    - Black (8 hours) - Timer or [OPEN]
    
    **When opened:**
    - Modal popup showing rewards
    - Auto-collect into inventory
-   - Timer resets
+   - Locker vanishes after
 
 4. **Index Tab** - View only
    - All cars in game
@@ -505,7 +525,7 @@ plot[playerId] = {
 
 **Conveyor System:**
 - Max 6 conveyors total
-- Start with 3 free
+- Start with 3
 - +1 at Rebirth 1 ($2000)
 - +1 at Rebirth 3 ($10000)
 - +1 at Robux 19 (premium)
@@ -583,7 +603,7 @@ end
 **Key Functions:**
 - `CalculateOfflineIncome(playerId, conveyorId)`
 - `AddAccumulatedIncome(playerId, conveyorId, amount)`
-- `CollectAll(playerId)` - Collect from all conveyors at once
+- `CollectAll(playerId)` - Collecting all the income for the conveyors
 - `UpdateIncomePerSecond(playerId, conveyorId)`
 
 ---
@@ -623,7 +643,9 @@ end
 ---
 
 ### 10. **ShopManager**
-**Purpose:** Dice shop where players buy dice for NPC generation
+**Purpose:** Dice shop where players buy RNG dice to obtain NPC Boosters
+pop-up intended, 
+**Access** Merchant npc area, player click on Shop it gets teleported to the merchant, hold E to acces the dice shop
 
 **Shop Interface:**
 Modern smooth UI style (Cyan/Purple theme - Bid Battles aesthetic)
@@ -653,11 +675,6 @@ Modern smooth UI style (Cyan/Purple theme - Bid Battles aesthetic)
 | Diamond | $1100 | Rare-Legendary | 50-100% | Always |
 | NA-SPEC | $2500 | Rare-SPEC | 50-150% | Rebirth 1+ |
 
-**RNG Breakdown:**
-- Basic: 1/2 common | 1/6 uncommon | 1/10 rare
-- Golden: 1/4 uncommon | 1/6 rare | 1/10 epic
-- Diamond: 1/10 rare | 1/6 epic | 1/12 legendary
-- NA-SPEC: 1/21 rare | 1/16 epic | 1/4 legendary | 1/8 SPEC
 
 **Flow:**
 ```
@@ -666,7 +683,7 @@ Modern smooth UI style (Cyan/Purple theme - Bid Battles aesthetic)
 2. Player selects dice type and clicks [BUY]
 3. Money deducted from wallet
 4. Dice goes to Items → Inventory
-5. Player opens dice → RNG rolls NPC (Dice disappears, NPC created)
+5. Player opens dice → RNG rolls NPC (Dice disappears, NPC obtained)
 6. NPC goes to Items → Inventory
 7. Player places NPC on conveyor at their plot
 ```
